@@ -64,17 +64,30 @@ def print_cells(cells):
             return_text += "□"
     print(return_text)
 
+def create_list_for_image(lists):
+    return_lists = []
+    for line in lists:
+        tmp_line = []
+        for i in line:
+            if i == 0:
+                tmp_line.append([255,255,255])
+            if i == 1:
+                tmp_line.append([0,0,0])
+        return_lists.append(tmp_line)
+    return return_lists
+
 tmp_cells = [0] * 23
 tmp_cells[11] = 1 #初期設定
 
 print("rule90")
 rule90_lists = []
 for _ in range(count):
-    print_cells(tmp_cells)
-    tmp_cells = nextstep(tmp_cells,90)
+    #print_cells(tmp_cells)
     rule90_lists.append(tmp_cells)
+    tmp_cells = nextstep(tmp_cells,90)
+    
 
-#cv2.imwrite('rule90.png',np.array(rule90_lists))
+cv2.imwrite('rule90.png',np.array(create_list_for_image(rule90_lists)))
 
 print("rule193")
 tmp_cells = [0] * 23
@@ -82,12 +95,15 @@ tmp_cells[11] = 1 #初期設定
 rule193_lists = []
 for _ in range(count):
     
-    print_cells(tmp_cells)
-    tmp_cells = nextstep(tmp_cells,193)
+    #print_cells(tmp_cells)
     rule193_lists.append(tmp_cells)
+    tmp_cells = nextstep(tmp_cells,193)
+    
 
-#print(np.array(rule193_lists))
-#cv2.imwrite('rule193.png',np.array(rule193_lists))
+
+cv2.imwrite('rule193.png',np.array(create_list_for_image(rule193_lists)))
+
+
 
 
 
